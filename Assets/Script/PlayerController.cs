@@ -32,6 +32,11 @@ public class PlayerController : MonoBehaviour
 	[Tooltip("弾")]
 	private GameObject bullet;
 
+    
+    [SerializeField]
+	[Tooltip("防弾")]
+	private GameObject protectSeed;
+
     private SpriteRenderer spriteRenderer;
     /*
     z:奥
@@ -101,6 +106,19 @@ public class PlayerController : MonoBehaviour
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
 		    Destroy(newBullet, 1.0f);
+        } else if(mode == 2 && counter%5==0) {
+            bulletCount--;
+            
+            Vector2 bulletPosition = this.transform.position;
+		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
+		    GameObject newBullet = Instantiate(protectSeed, bulletPosition, this.gameObject.transform.rotation);
+		    // 出現させた弾のup(Y軸方向)を取得（MuzzleのローカルY軸方向のこと）
+		    Vector2 direction = newBullet.transform.up;
+            newBullet.transform.Translate(direction*10);
+		    // 出現させた弾の名前を"bullet"に変更
+		    newBullet.name = bullet.name;
+		    // 出現させた弾を0.8秒後に消す
+		    Destroy(newBullet, 4.0f);
         }
     }
 
@@ -170,6 +188,14 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Space)) {
                     //playerRotate();
                     attackToEnemy(1);
+                    spriteRenderer.sprite = attack;
+                    status = "attack";
+                    changeToDef(0.5f);
+                }
+                
+                if (Input.GetKey(KeyCode.B)) {
+                    //playerRotate();
+                    attackToEnemy(2);
                     spriteRenderer.sprite = attack;
                     status = "attack";
                     changeToDef(0.5f);

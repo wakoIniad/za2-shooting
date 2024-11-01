@@ -40,9 +40,12 @@ public class gameManager : MonoBehaviour
         }
         Debug.Log(judgement);
     }
-    public void damageEnemy(float d) {
+    public void damageEnemy(float d, GameObject enemyObj, float hp) {
         judgement += d;
         moveJudgeBar(d);
+        if(hp < 0) {
+            Destroy(enemyObj);
+        }
         if(judgement > enemyPoint) {
             //勝ち処理
             displayResult(true);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBrain : MonoBehaviour
 {
 
-    public float hp = 200;
+    public float hp = 25;
     public GameObject judgeBar;
     
     public GameObject gameManagerObject;
@@ -52,7 +52,9 @@ public class EnemyBrain : MonoBehaviour
     {
         if(other.gameObject.tag == "purified_sheed") {
             hp--;
-            gameManager.damageEnemy(0.5f);
+            gameManager.damageEnemy(1f,this.gameObject,hp);
+            if(hp < 0) {
+            }
         }
     }
 }
