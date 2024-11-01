@@ -4,48 +4,56 @@ using UnityEngine;
 
 public class gameManager : MonoBehaviour
 {
-    public float hp = 0;
+    public float judgement = 0;
 
-    public float playerHP = 200;
-    public float enemyHP = 200;
+    public float playerPoint = 200;
+    public float enemyPoint = 200;
 
-    public GameObject hpBer;
+    public GameObject judgeBar;
     // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    float hpBerWidth = 16;
+    float judgeBarWidth = 16;
 
-    void moveHpBer(float d) {
-        if(hp > 0) {
-            hpBer.transform.Translate(new Vector3(hpBerWidth*3.5f/playerHP*d,0,0));
+    void moveJudgeBar(float d) {
+        if(judgement > 0) {
+            judgeBar.transform.Translate(new Vector3(judgeBarWidth*3.5f/playerPoint*d,0,0));
         } else {
-            hpBer.transform.Translate(new Vector3(hpBerWidth*3.5f/enemyHP*d,0,0));
+            judgeBar.transform.Translate(new Vector3(judgeBarWidth*3.5f/enemyPoint*d,0,0));
         }
     }
 
     public void damagePlayer(float d) {
-        hp -= d;
-        moveHpBer(-d);
-        if(hp < -playerHP) {
+        judgement -= d;
+        moveJudgeBar(-d);
+        if(judgement < -playerPoint) {
             //負け処理
         }
-        Debug.Log(hp);
+        Debug.Log(judgement);
     }
     public void damageEnemy(float d) {
-        hp += d;
-        moveHpBer(d);
-        if(hp > enemyHP) {
+        judgement += d;
+        moveJudgeBar(d);
+        if(judgement > enemyPoint) {
             //勝ち処理
         }
-        Debug.Log(hp);
+        Debug.Log(judgement);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    
+    public void playerWin() {
+        Debug.Log("win!!");
+    }
+    public void playerLose() {
+        Debug.Log("lose..");
     }
 }

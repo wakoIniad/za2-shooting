@@ -5,8 +5,8 @@ using UnityEngine;
 public class EnemyBrain : MonoBehaviour
 {
 
-    
-    public GameObject hpBer;
+    public float hp = 200;
+    public GameObject judgeBar;
     
     public GameObject gameManagerObject;
     public gameManager gameManager;
@@ -51,6 +51,7 @@ public class EnemyBrain : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "purified_sheed") {
+            hp--;
             gameManager.damageEnemy(2f);
         }
     }

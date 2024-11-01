@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gameManagerObject;
     public gameManager gameManager;
 
-    public GameObject hpBer;
+    public GameObject judgeBar;
 
     [SerializeField]
 	[Tooltip("弾")]
