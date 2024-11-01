@@ -103,11 +103,11 @@ public class PlayerController : MonoBehaviour
     void attackToEnemy(int mode) {
         
         attackerClock += Time.deltaTime;
-        if(attackerClock - lastAttackerClock > 0.05f) {
-            counter++;
+        if(attackerClock - lastAttackerClock > 0.04f) {
+            //counter++;//ここor
             lastAttackerClock += attackerClock;
         }
-        //counter++;
+        counter++;//ここ
         if(mode == 1 && counter % 10 == 0) {
             if(bulletUse(4))return;
             //var rotation = this.transform.rotation;
@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
     float lastTime = 0;
     int frameCounter = 0;
     void playerRotate(int direction) {
-        if(frameCounter%5 == 0) {
+        if(frameCounter%3 == 0) {
             this.gameObject.transform.Rotate(new Vector3(0,0,direction));
             lastTime = Time.fixedDeltaTime;
         }
@@ -175,9 +175,9 @@ public class PlayerController : MonoBehaviour
             displayBulletBar();
         }
         clock += Time.deltaTime;
-        if(clock - lastFrameClock > 0.05f) {
+        if(clock - lastFrameClock > 0.04f) {
             frameCounter++;
-            lastFrameClock += 0.05f;
+            lastFrameClock += 0.04f;
         }
         if(!anyKeyIsPressing && speed != defSpeed) {
             speed = defSpeed;
