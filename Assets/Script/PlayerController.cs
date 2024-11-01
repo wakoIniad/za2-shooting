@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
         bulletCount = bulletSlot;
         gameManager.startTime = Time.time;
     }
-    int bulletSlot = 200;
+    int bulletSlot = 400;
     float bulletBarWidth;
 
     int bulletCount = 100;
@@ -90,9 +90,10 @@ public class PlayerController : MonoBehaviour
         
             displayBulletBar();
             if(bulletCount < 0) {
-                attackStatus = "reload";
+                attackStatus = "heavyReload";
+                return true;
             }
-            if(attackStatus == "reload")return true;
+            if(attackStatus == "heavyReload")return true;
             bulletCount-=count;
             attackStatus="ok";
             return false;
@@ -100,7 +101,7 @@ public class PlayerController : MonoBehaviour
     void attackToEnemy(int mode) {
         counter++;
         if(mode == 1 && counter % 10 == 0) {
-            if(bulletUse(2))return;
+            if(bulletUse(4))return;
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -117,7 +118,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%5==0) {
             
-            if(bulletUse(1))return;
+            if(bulletUse(2))return;
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
@@ -157,9 +158,10 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if(attackStatus == "reload") {
+        if(attackStatus == "reload" || attackStatus == "heavyReload") {
             if(bulletCount < bulletSlot) {
-                bulletCount += 1;
+                if(attackStatus == "heavyReload")bulletCount += 2;
+                if(attackStatus == "reload")bulletCount += 1;
             } else {
                 attackStatus = "ok";
                 bulletCount = bulletSlot;
