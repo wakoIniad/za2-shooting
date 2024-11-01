@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     int counter = 0;
     void attackToEnemy(int mode) {
         counter++;
-        if(mode == 1 && counter % 25 == 0) {
+        if(mode == 1 && counter % 10 == 0) {
             bulletCount--;
             displayBulletBar();
             if(bulletCount < 1) {
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
             } else {
                 gameManager.damagePlayer(1f);
             }
-            StartCoroutine(changeToDef(0.5f));
+            StartCoroutine(changeToDef(1f));
         }
     }
     //Einumerator changeToDef(float waitTime){
