@@ -173,6 +173,7 @@ public class PlayerController : MonoBehaviour
         bool temp = false;
         spendTime += Time.deltaTime;
         spriteRenderer.sprite = def;
+        Awake();
         for(int i = 0;i < contorols.Length;i++) {
             KeyCodeAndNum ctrl = contorols[i];
             KeyCode [] KeyCodes = ctrl.keyCodes;
@@ -274,6 +275,7 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(waitTime);
         spriteRenderer.sprite = def;
         //this.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+        Awake();
     }
 
     
