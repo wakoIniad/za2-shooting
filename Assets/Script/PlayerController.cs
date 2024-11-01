@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 		    GameObject newBullet = Instantiate(protectSeed, bulletPosition, this.gameObject.transform.rotation);
 		    // 出現させた弾のup(Y軸方向)を取得（MuzzleのローカルY軸方向のこと）
 		    Vector2 direction = newBullet.transform.up;
-            newBullet.transform.Translate(direction*10);
+            newBullet.transform.Translate(-direction*10);
 		    // 出現させた弾の名前を"bullet"に変更
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
         if(attackStatus == "reload") {
             bulletCount += 1;
             displayBulletBar();
-            if(bulletCount == bulletSlot) {
+            if(bulletCount > bulletSlot) {
                 attackStatus = "ok";
             }
         }
