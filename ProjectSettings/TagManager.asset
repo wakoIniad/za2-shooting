@@ -8,6 +8,7 @@ TagManager:
   - purified_sheed
   - rotten_sheed
   - judge_bar
+  - ResultManager
   layers:
   - Default
   - TransparentFX

@@ -1,7 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+using System;
+using UnityEngine.Events;
+using System.Collections.Generic;
 public class gameManager : MonoBehaviour
 {
     public float judgement = 0;
@@ -32,7 +36,7 @@ public class gameManager : MonoBehaviour
         moveJudgeBar(-d);
         if(judgement < -playerPoint) {
             //負け処理
-            playerLose();
+            displayResult(false);
         }
         Debug.Log(judgement);
     }
@@ -41,7 +45,7 @@ public class gameManager : MonoBehaviour
         moveJudgeBar(d);
         if(judgement > enemyPoint) {
             //勝ち処理
-            playerWin();
+            displayResult(true);
         }
         Debug.Log(judgement);
     }
@@ -52,11 +56,14 @@ public class gameManager : MonoBehaviour
         
     }
 
-    
-    public void playerWin() {
-        Debug.Log("win!!");
+    bool result;
+    void ActiveSceneChanged(Scene thisScene, Scene nextScene) {
+        displayResult displayResult = GameObject.FindWithTag("ResultManager").GetComponent<displayResult>();
+        displayResult.result = result;
     }
-    public void playerLose() {
-        Debug.Log("lose..");
+    public void displayResult(bool win) {
+        SceneManager.LoadScene("result");
+        SceneManager.activeSceneChanged += ActiveSceneChanged;
+        result = win;
     }
 }

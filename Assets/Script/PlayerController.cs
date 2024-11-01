@@ -82,10 +82,11 @@ public class PlayerController : MonoBehaviour
         counter++;
         if(mode == 1 && counter % 10 == 0) {
             bulletCount--;
+            displayBulletBar();
             if(bulletCount < 1) {
                 attackStatus = "reload";
-                return;
             }
+            if(attackStatus == "reload")return;
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
     string attackStatus = "ok";
 
     void displayBulletBar() {
-        bulletBar.transform.localScale = new Vector3(bulletCount/bulletSlot, 1, 1);
+        bulletBar.transform.localScale = new Vector3(1.3f*bulletCount/bulletSlot, 0.13f, 1);
     }
     void Update()
     {

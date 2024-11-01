@@ -20,11 +20,11 @@ public class sencer : MonoBehaviour
     }
     void OnTriggerEnter(Collider other) {
         if(other.gameObject.tag == "judge_bar") {
-            Debug.Log("TESTAAAA");
+            //Debug.Log("TESTAAAA");
             if(sencerType == 0) {
-                gameManager.playerLose();
+                //gameManager.playerLose();
             } else if(sencerType == 1) {
-                gameManager.playerWin();
+                //gameManager.playerWin();
             }
         }
     }
