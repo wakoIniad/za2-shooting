@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         public Vector2 vec;
     }
 
+
     public Sprite def;
     public Sprite move;
     public Sprite attack;
@@ -61,8 +62,9 @@ public class PlayerController : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<gameManager>();
         bulletBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
+        gameManager.startTime = Time.time;
     }
-    int bulletSlot = 100;
+    int bulletSlot = 200;
     float bulletBarWidth;
 
     int bulletCount = 100;
@@ -83,15 +85,22 @@ public class PlayerController : MonoBehaviour
     //int? offset_y = null;
 
     int counter = 0;
-    void attackToEnemy(int mode) {
-        counter++;
-        if(mode == 1 && counter % 10 == 0) {
-            bulletCount--;
+
+    void bulletUse(int count) {
+        
+            bulletCount-=count;
             displayBulletBar();
             if(bulletCount < 1) {
                 attackStatus = "reload";
+                return;
             }
-            if(attackStatus == "reload")return;
+            //if(attackStatus == "reload")return;
+            attackStatus="ok";
+    }
+    void attackToEnemy(int mode) {
+        counter++;
+        if(mode == 1 && counter % 10 == 0) {
+            bulletUse(2);
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -107,8 +116,8 @@ public class PlayerController : MonoBehaviour
 		    // 出現させた弾を0.8秒後に消す
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%5==0) {
-            bulletCount--;
-            displayBulletBar();
+            
+            bulletUse(1);
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
@@ -149,11 +158,11 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(attackStatus == "reload") {
-            bulletCount += 1;
             if(bulletCount > bulletSlot) {
                 attackStatus = "ok";
                 bulletCount = bulletSlot;
             }
+            bulletCount += 1;
             displayBulletBar();
         }
         frameCounter ++;
@@ -187,7 +196,7 @@ public class PlayerController : MonoBehaviour
                     temp = true;
                 }
                 
-                if (Input.GetKey(KeyCode.Space)) {
+                if (Input.GetKey(KeyCode.L)) {
                     //playerRotate();
                     attackToEnemy(1);
                     spriteRenderer.sprite = attack;
@@ -204,7 +213,7 @@ public class PlayerController : MonoBehaviour
                 }
                 if (Input.GetKey(KeyCode.P)) {
                     attackStatus = "reload";
-                    bulletCount = 0;
+                    //bulletCount = 0;
                 }
 
                 if (Input.GetKey(KeyCode.Q)||Input.GetKey(KeyCode.A)) {

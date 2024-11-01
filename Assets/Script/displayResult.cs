@@ -19,9 +19,9 @@ public class displayResult : MonoBehaviour
     void Update()
     {
         if(result) {
-            text.text = "You Win";
+            text.text = "You Win, score="+score;
         } else {
-            text.text = "You Lose";
+            text.text = "You Lose, score=--";
         }
     }
 }

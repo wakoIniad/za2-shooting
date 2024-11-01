@@ -8,6 +8,8 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 public class gameManager : MonoBehaviour
 {
+    public float startTime;
+    public float endTime;
     public float judgement = 0;
 
     public float playerPoint = 200;
@@ -63,10 +65,12 @@ public class gameManager : MonoBehaviour
     void ActiveSceneChanged(Scene thisScene, Scene nextScene) {
         displayResult displayResult = GameObject.FindWithTag("ResultManager").GetComponent<displayResult>();
         displayResult.result = result;
+        displayResult.score = (int) (endTime - startTime);
     }
     public void displayResult(bool win) {
         SceneManager.LoadScene("result");
         SceneManager.activeSceneChanged += ActiveSceneChanged;
         result = win;
+        endTime = Time.time;;
     }
 }
