@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%5==0) {
             bulletCount--;
+            displayBulletBar();
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
