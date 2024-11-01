@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public gameManager gameManager;
 
     public GameObject judgeBar;
+    public GameObject bulletBar;
 
     [SerializeField]
 	[Tooltip("弾")]
@@ -53,7 +54,11 @@ public class PlayerController : MonoBehaviour
         //[x,y] 右が+ 前が+
         //gameManager= GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         gameManager = gameManagerObject.GetComponent<gameManager>();
+        bulletBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
+        bulletCount = bulletSlot;
     }
+    int bulletSlot = 100;
+    float bulletBarWidth;
 
     int bulletCount = 100;
     float spendTime = 0f;
@@ -76,6 +81,11 @@ public class PlayerController : MonoBehaviour
     void attackToEnemy(int mode) {
         counter++;
         if(mode == 1 && counter % 10 == 0) {
+            bulletCount--;
+            if(bulletCount < 1) {
+                attackStatus = "reload";
+                return;
+            }
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -92,6 +102,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         }
     }
+
 
     float lastTime = 0;
     int frameCounter = 0;
@@ -110,8 +121,20 @@ public class PlayerController : MonoBehaviour
     string status = "def";
 
     bool anyKeyIsPressing = false;
+    string attackStatus = "ok";
+
+    void displayBulletBar() {
+        bulletBar.transform.localScale = new Vector3(bulletCount/bulletSlot, 1, 1);
+    }
     void Update()
     {
+        if(attackStatus == "reload") {
+            bulletCount += 1;
+            displayBulletBar();
+            if(bulletCount == bulletSlot) {
+                attackStatus = "ok";
+            }
+        }
         frameCounter ++;
         if(!anyKeyIsPressing && speed != defSpeed) {
             speed = defSpeed;
