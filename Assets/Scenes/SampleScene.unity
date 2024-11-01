@@ -681,7 +681,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: judge_bar
       objectReference: {fileID: 0}
     - target: {fileID: 8354720259753225184, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_LocalScale.x
@@ -791,8 +791,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -909260961
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ea87259e8fd793545b7406ad12f4d268, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1325,7 +1325,6 @@ GameObject:
   - component: {fileID: 1063268038}
   - component: {fileID: 1063268041}
   - component: {fileID: 1063268040}
-  - component: {fileID: 1063268039}
   - component: {fileID: 1063268042}
   m_Layer: 0
   m_Name: lose_sencer
@@ -1349,33 +1348,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4024164268577399652}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1063268039
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1063268037}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1063268040
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1657,7 +1629,6 @@ GameObject:
   - component: {fileID: 1977058430}
   - component: {fileID: 1977058434}
   - component: {fileID: 1977058433}
-  - component: {fileID: 1977058432}
   - component: {fileID: 1977058431}
   m_Layer: 0
   m_Name: win_sencer
@@ -1696,33 +1667,6 @@ MonoBehaviour:
   sencerType: 1
   gameManagerObject: {fileID: 713881520}
   gameManager: {fileID: 0}
---- !u!50 &1977058432
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1977058429}
-  m_BodyType: 2
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!61 &1977058433
 BoxCollider2D:
   m_ObjectHideFlags: 0

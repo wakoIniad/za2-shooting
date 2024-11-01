@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - purified_sheed
   - rotten_sheed
+  - judge_bar
   layers:
   - Default
   - TransparentFX
@@ -43,4 +44,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3385706335
     locked: 0

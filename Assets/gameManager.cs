@@ -32,7 +32,7 @@ public class gameManager : MonoBehaviour
         if(judgement < -playerPoint) {
             //負け処理
         }
-        Debug.Log(judgement);
+        //Debug.Log(judgement);
     }
     public void damageEnemy(float d) {
         judgement += d;
@@ -40,7 +40,7 @@ public class gameManager : MonoBehaviour
         if(judgement > enemyPoint) {
             //勝ち処理
         }
-        Debug.Log(judgement);
+        //Debug.Log(judgement);
     }
 
     // Update is called once per frame
