@@ -99,7 +99,7 @@ public class PlayerController : MonoBehaviour
 		    GameObject newBullet = Instantiate(bullet, bulletPosition, this.gameObject.transform.rotation);
 		    // 出現させた弾のup(Y軸方向)を取得（MuzzleのローカルY軸方向のこと）
 		    Vector2 direction = newBullet.transform.up;
-            newBullet.transform.Translate(direction*10);
+            newBullet.transform.Translate(new Vector2(0,1)*10);
 		    // 弾の発射方向にnewBallのY方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
 		    newBullet.GetComponent<Rigidbody2D>().AddForce(direction * 100, ForceMode2D.Impulse);
 		    // 出現させた弾の名前を"bullet"に変更
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
 		    GameObject newBullet = Instantiate(protectSeed, bulletPosition, this.gameObject.transform.rotation);
 		    // 出現させた弾のup(Y軸方向)を取得（MuzzleのローカルY軸方向のこと）
 		    Vector2 direction = newBullet.transform.up;
-            newBullet.transform.Translate(-direction*10);
+            newBullet.transform.Translate(new Vector2(0,1)*10);
 		    // 出現させた弾の名前を"bullet"に変更
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         //float d = (Time.fixedDeltaTime - lastTime)*frameCounter;
         //Debug.Log(d);
         //if(d > 0.1) {
-        if(frameCounter%3 == 0) {
+        if(frameCounter%5 == 0) {
             this.gameObject.transform.Rotate(new Vector3(0,0,direction));
             lastTime = Time.fixedDeltaTime;
         }
@@ -149,10 +149,11 @@ public class PlayerController : MonoBehaviour
     {
         if(attackStatus == "reload") {
             bulletCount += 1;
-            displayBulletBar();
             if(bulletCount > bulletSlot) {
                 attackStatus = "ok";
+                bulletCount = bulletSlot;
             }
+            displayBulletBar();
         }
         frameCounter ++;
         if(!anyKeyIsPressing && speed != defSpeed) {
@@ -205,10 +206,10 @@ public class PlayerController : MonoBehaviour
                     bulletCount = 0;
                 }
 
-                if (Input.GetKey(KeyCode.Q)) {
+                if (Input.GetKey(KeyCode.Q)||Input.GetKey(KeyCode.A)) {
                     playerRotate(1);
                 }
-                if (Input.GetKey(KeyCode.E)) {
+                if (Input.GetKey(KeyCode.E)||Input.GetKey(KeyCode.D)) {
                     playerRotate(-1);
                 }
 
