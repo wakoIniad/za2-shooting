@@ -98,8 +98,16 @@ public class PlayerController : MonoBehaviour
             attackStatus="ok";
             return false;
     }
+    float attackerClock = 0;
+    float lastAttackerClock = 0;
     void attackToEnemy(int mode) {
-        counter++;
+        
+        attackerClock += Time.deltaTime;
+        if(attackerClock - lastAttackerClock > 0.04f) {
+            counter++;
+            lastAttackerClock += 0.04f;
+        }
+        //counter++;
         if(mode == 1 && counter % 10 == 0) {
             if(bulletUse(4))return;
             //var rotation = this.transform.rotation;
@@ -116,7 +124,7 @@ public class PlayerController : MonoBehaviour
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
 		    Destroy(newBullet, 1.0f);
-        } else if(mode == 2 && counter%5==0) {
+        } else if(mode == 2 && counter%10==0) {
             
             if(bulletUse(2))return;
             
@@ -137,10 +145,6 @@ public class PlayerController : MonoBehaviour
     float lastTime = 0;
     int frameCounter = 0;
     void playerRotate(int direction) {
-        ///counter ++;
-        //float d = (Time.fixedDeltaTime - lastTime)*frameCounter;
-        //Debug.Log(d);
-        //if(d > 0.1) {
         if(frameCounter%5 == 0) {
             this.gameObject.transform.Rotate(new Vector3(0,0,direction));
             lastTime = Time.fixedDeltaTime;
@@ -156,6 +160,8 @@ public class PlayerController : MonoBehaviour
     void displayBulletBar() {
         bulletBar.transform.localScale = new Vector3(1.3f*bulletCount/bulletSlot, 0.13f, 1);
     }
+    float clock = 0f;
+    float lastFrameClock = 0f;
     void Update()
     {
         if(attackStatus == "reload" || attackStatus == "heavyReload") {
@@ -168,7 +174,11 @@ public class PlayerController : MonoBehaviour
             }
             displayBulletBar();
         }
-        frameCounter ++;
+        clock += Time.deltaTime;
+        if(clock - lastFrameClock > 0.04f) {
+            frameCounter++;
+            lastFrameClock += 0.04f;
+        }
         if(!anyKeyIsPressing && speed != defSpeed) {
             speed = defSpeed;
         }

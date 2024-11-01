@@ -22,8 +22,17 @@ public class EnemyBrain : MonoBehaviour
 
     // Update is called once per frame
     int frameCounter = 0;
+    float clock = 0f;
+    float lastFrameClock = 0f;
     void Update()
     {
+        clock += Time.deltaTime;
+        if(clock - lastFrameClock > 0.04f) {
+            frameCounter++;
+            lastFrameClock += 0.04f;
+        }
+
+
         Vector2 bulletPosition = this.transform.position;
         Vector2 playerPosition = player.transform.position;
         Vector2 dirOfPlayer = (playerPosition-bulletPosition).normalized*0.1f;
