@@ -13,16 +13,17 @@ public class gameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        judgeBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
     }
 
-    float judgeBarWidth = 16;
+//    float judgeBarWidth = 16;
+    float judgeBarWidth;
 
     void moveJudgeBar(float d) {
         if(judgement > 0) {
-            judgeBar.transform.Translate(new Vector3(judgeBarWidth*3.5f/playerPoint*d,0,0));
+            judgeBar.transform.Translate(new Vector3(judgeBarWidth/4f/playerPoint*d,0,0));
         } else {
-            judgeBar.transform.Translate(new Vector3(judgeBarWidth*3.5f/enemyPoint*d,0,0));
+            judgeBar.transform.Translate(new Vector3(judgeBarWidth/4f/enemyPoint*d,0,0));
         }
     }
 
@@ -31,16 +32,18 @@ public class gameManager : MonoBehaviour
         moveJudgeBar(-d);
         if(judgement < -playerPoint) {
             //負け処理
+            playerLose();
         }
-        //Debug.Log(judgement);
+        Debug.Log(judgement);
     }
     public void damageEnemy(float d) {
         judgement += d;
         moveJudgeBar(d);
         if(judgement > enemyPoint) {
             //勝ち処理
+            playerWin();
         }
-        //Debug.Log(judgement);
+        Debug.Log(judgement);
     }
 
     // Update is called once per frame
