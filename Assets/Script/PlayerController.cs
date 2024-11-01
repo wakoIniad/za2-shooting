@@ -164,20 +164,21 @@ public class PlayerController : MonoBehaviour
     float lastFrameClock = 0f;
     void Update()
     {
-        if(attackStatus == "reload" || attackStatus == "heavyReload") {
-            if(bulletCount < bulletSlot) {
-                if(attackStatus == "heavyReload")bulletCount += 2;
-                if(attackStatus == "reload")bulletCount += 1;
-            } else {
-                attackStatus = "ok";
-                bulletCount = bulletSlot;
-            }
-            displayBulletBar();
-        }
         clock += Time.deltaTime;
         if(clock - lastFrameClock > 0.04f) {
             frameCounter++;
             lastFrameClock += 0.04f;
+            
+            if(attackStatus == "reload" || attackStatus == "heavyReload") {
+                if(bulletCount < bulletSlot) {
+                    if(attackStatus == "heavyReload")bulletCount += 2;
+                    if(attackStatus == "reload")bulletCount += 1;
+                } else {
+                    attackStatus = "ok";
+                    bulletCount = bulletSlot;
+                }
+                displayBulletBar();
+            }
         }
         if(!anyKeyIsPressing && speed != defSpeed) {
             speed = defSpeed;
