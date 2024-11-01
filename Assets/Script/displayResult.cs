@@ -16,10 +16,13 @@ public class displayResult : MonoBehaviour
     }
 
     // Update is called once per frame
+    int calcScore(int n) {
+        return (int) (100 * 10000/n);
+    }
     void Update()
     {
         if(result) {
-            text.text = "You Win, score="+score;
+            text.text = "You Win, score="+calcScore(score);
         } else {
             text.text = "You Lose, score=--";
         }

@@ -190,7 +190,8 @@ public class PlayerController : MonoBehaviour
                         ctrl.vec.y*speed
                     )); 
 
-                    spriteRenderer.sprite = move;        
+                    spriteRenderer.sprite = move;   
+                    Awake();     
                     //this.gameObject.transform.localScale = new Vector3(0.25f,0.25f,1f);;
                     status = "move";
                     temp = true;
@@ -280,5 +281,25 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(1f);
         target.enabled = true;
         //this.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+    }
+
+    private void Awake()
+    {
+        var spriteRenderer    = GetComponent<SpriteRenderer>();
+        var sprite            = spriteRenderer.sprite;
+        var polygonCollider2D = GetComponent<PolygonCollider2D>();
+        var physicsShapeCount = sprite.GetPhysicsShapeCount();
+
+        polygonCollider2D.pathCount = physicsShapeCount;
+
+        var physicsShape = new List<Vector2>();
+
+        for ( var i = 0; i < physicsShapeCount; i++ )
+        {
+            physicsShape.Clear();
+            sprite.GetPhysicsShape( i, physicsShape );
+            var points = physicsShape.ToArray();
+            polygonCollider2D.SetPath( i, points );
+        }
     }
 }
