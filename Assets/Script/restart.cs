@@ -8,8 +8,9 @@ public class restart : MonoBehaviour
     // Start is called before the first frame update
     public void OnClick()
     {
-      
-        SceneManager.LoadScene("SampleScene");  
+        //Application.LoadLevel(Application.loadedLevel);
+        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene("SampleScene");  
     }
 
     // Update is called once per frame

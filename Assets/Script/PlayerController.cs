@@ -103,9 +103,9 @@ public class PlayerController : MonoBehaviour
     void attackToEnemy(int mode) {
         
         attackerClock += Time.deltaTime;
-        if(attackerClock - lastAttackerClock > 0.04f) {
+        if(attackerClock - lastAttackerClock > 0.05f) {
             counter++;
-            lastAttackerClock += 0.04f;
+            lastAttackerClock += attackerClock;
         }
         //counter++;
         if(mode == 1 && counter % 10 == 0) {
@@ -175,9 +175,9 @@ public class PlayerController : MonoBehaviour
             displayBulletBar();
         }
         clock += Time.deltaTime;
-        if(clock - lastFrameClock > 0.04f) {
+        if(clock - lastFrameClock > 0.05f) {
             frameCounter++;
-            lastFrameClock += 0.04f;
+            lastFrameClock += 0.05f;
         }
         if(!anyKeyIsPressing && speed != defSpeed) {
             speed = defSpeed;

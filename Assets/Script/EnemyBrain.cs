@@ -27,9 +27,9 @@ public class EnemyBrain : MonoBehaviour
     void Update()
     {
         clock += Time.deltaTime;
-        if(clock - lastFrameClock > 0.04f) {
+        if(clock - lastFrameClock > 0.05f) {
             frameCounter++;
-            lastFrameClock += 0.04f;
+            lastFrameClock += 0.05f;
         }
 
 

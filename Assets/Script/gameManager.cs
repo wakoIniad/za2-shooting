@@ -63,6 +63,7 @@ public class gameManager : MonoBehaviour
 
     bool result;
     void ActiveSceneChanged(Scene thisScene, Scene nextScene) {
+        SceneManager.activeSceneChanged -= ActiveSceneChanged;
         displayResult displayResult = GameObject.FindWithTag("ResultManager").GetComponent<displayResult>();
         displayResult.result = result;
         displayResult.score = (int) (endTime - startTime);
