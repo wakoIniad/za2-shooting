@@ -86,21 +86,21 @@ public class PlayerController : MonoBehaviour
 
     int counter = 0;
 
-    void bulletUse(int count) {
+    bool bulletUse(int count) {
         
-            bulletCount-=count;
             displayBulletBar();
-            if(bulletCount < 1) {
+            if(bulletCount < 0) {
                 attackStatus = "reload";
-                return;
             }
-            //if(attackStatus == "reload")return;
+            if(attackStatus == "reload")return true;
+            bulletCount-=count;
             attackStatus="ok";
+            return false;
     }
     void attackToEnemy(int mode) {
         counter++;
         if(mode == 1 && counter % 10 == 0) {
-            bulletUse(2);
+            if(bulletUse(2))return;
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%5==0) {
             
-            bulletUse(1);
+            if(bulletUse(1))return;
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
@@ -158,11 +158,12 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         if(attackStatus == "reload") {
-            if(bulletCount > bulletSlot) {
+            if(bulletCount < bulletSlot) {
+                bulletCount += 1;
+            } else {
                 attackStatus = "ok";
                 bulletCount = bulletSlot;
             }
-            bulletCount += 1;
             displayBulletBar();
         }
         frameCounter ++;
@@ -256,7 +257,7 @@ public class PlayerController : MonoBehaviour
             if(status == "move") {
                 gameManager.damagePlayer(8f);
             } else {
-                gameManager.damagePlayer(1f);
+                gameManager.damagePlayer(2f);
             }
             StartCoroutine(changeToDef(1f));
         } else if(other.gameObject.tag == "protect_bullet") {
