@@ -40,7 +40,7 @@ public class EnemyBrain : MonoBehaviour
 		    // 出現させた弾のup(Y軸方向)を取得（MuzzleのローカルY軸方向のこと）
 		    Vector2 direction = newBullet.transform.up;
 		    // 弾の発射方向にnewBallのY方向(ローカル座標)を入れ、弾オブジェクトのrigidbodyに衝撃力を加える
-		    newBullet.GetComponent<Rigidbody2D>().AddForce(direction * 100, ForceMode2D.Impulse);
+		    newBullet.GetComponent<Rigidbody2D>().AddForce(direction * 40, ForceMode2D.Impulse);
 		    // 出現させた弾の名前を"bullet"に変更
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
@@ -52,7 +52,7 @@ public class EnemyBrain : MonoBehaviour
     {
         if(other.gameObject.tag == "purified_sheed") {
             hp--;
-            gameManager.damageEnemy(2f);
+            gameManager.damageEnemy(0.5f);
         }
     }
 }

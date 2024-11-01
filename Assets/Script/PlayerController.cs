@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
 
     int bulletCount = 100;
     float spendTime = 0f;
-    float defSpeed = 10f;
+    float defSpeed = 25f;
     float speed = 10f;
     float lastPushedTime = -1f;
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     int counter = 0;
     void attackToEnemy(int mode) {
         counter++;
-        if(mode == 1 && counter % 10 == 0) {
+        if(mode == 1 && counter % 25 == 0) {
             bulletCount--;
             displayBulletBar();
             if(bulletCount < 1) {
@@ -151,11 +151,18 @@ public class PlayerController : MonoBehaviour
             for(int j = 0;j < KeyCodes.Length;j++) {
                 KeyCode key = KeyCodes[j];
                 if(Input.GetKey(key)) {
-                    transform.Translate(
+                    /*transform.Translate(
                         ctrl.vec.x*Time.deltaTime*speed,
                         ctrl.vec.y*Time.deltaTime*speed,0
-                    );
-                    spriteRenderer.sprite = move;
+                    );*/
+                    Rigidbody2D rb = this.gameObject.GetComponent<Rigidbody2D>();
+                    rb.AddRelativeFor​​ce(new Vector2(
+                        ctrl.vec.x*speed,
+                        ctrl.vec.y*speed
+                    )); 
+
+                    spriteRenderer.sprite = move;        
+                    //this.gameObject.transform.localScale = new Vector3(0.25f,0.25f,1f);;
                     status = "move";
                     temp = true;
                 }
@@ -166,6 +173,9 @@ public class PlayerController : MonoBehaviour
                     spriteRenderer.sprite = attack;
                     status = "attack";
                     changeToDef(0.5f);
+                }
+                if (Input.GetKey(KeyCode.P)) {
+                    attackStatus = "reload";
                 }
 
                 if (Input.GetKey(KeyCode.Q)) {
@@ -207,7 +217,7 @@ public class PlayerController : MonoBehaviour
             if(status == "move") {
                 gameManager.damagePlayer(8f);
             } else {
-                gameManager.damagePlayer(2f);
+                gameManager.damagePlayer(1f);
             }
             StartCoroutine(changeToDef(0.5f));
         }
@@ -219,5 +229,6 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         spriteRenderer.sprite = def;
+        //this.gameObject.transform.localScale = new Vector3(1f,1f,1f);
     }
 }
