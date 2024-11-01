@@ -9,6 +9,7 @@ TagManager:
   - rotten_sheed
   - judge_bar
   - ResultManager
+  - protect_bullet
   layers:
   - Default
   - TransparentFX

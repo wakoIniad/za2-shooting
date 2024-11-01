@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         //float d = (Time.fixedDeltaTime - lastTime)*frameCounter;
         //Debug.Log(d);
         //if(d > 0.1) {
-        if(frameCounter%5 == 0) {
+        if(frameCounter%3 == 0) {
             this.gameObject.transform.Rotate(new Vector3(0,0,direction));
             lastTime = Time.fixedDeltaTime;
         }
@@ -193,7 +193,7 @@ public class PlayerController : MonoBehaviour
                     changeToDef(0.5f);
                 }
                 
-                if (Input.GetKey(KeyCode.B)) {
+                if (Input.GetKey(KeyCode.O)) {
                     //playerRotate();
                     attackToEnemy(2);
                     spriteRenderer.sprite = attack;
@@ -202,12 +202,13 @@ public class PlayerController : MonoBehaviour
                 }
                 if (Input.GetKey(KeyCode.P)) {
                     attackStatus = "reload";
+                    bulletCount = 0;
                 }
 
                 if (Input.GetKey(KeyCode.Q)) {
                     playerRotate(1);
                 }
-                if (Input.GetKey(KeyCode.R)) {
+                if (Input.GetKey(KeyCode.E)) {
                     playerRotate(-1);
                 }
 
@@ -246,6 +247,10 @@ public class PlayerController : MonoBehaviour
                 gameManager.damagePlayer(1f);
             }
             StartCoroutine(changeToDef(1f));
+        } else if(other.gameObject.tag == "protect_bullet") {
+            CircleCollider2D col = other.gameObject.GetComponent<CircleCollider2D>();
+            col.enabled = false;
+            reEnable(col);
         }
     }
     //Einumerator changeToDef(float waitTime){
@@ -255,6 +260,14 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         spriteRenderer.sprite = def;
+        //this.gameObject.transform.localScale = new Vector3(1f,1f,1f);
+    }
+
+    
+    IEnumerator reEnable(CircleCollider2D target)
+    {
+        yield return new WaitForSeconds(1f);
+        target.enabled = true;
         //this.gameObject.transform.localScale = new Vector3(1f,1f,1f);
     }
 }
