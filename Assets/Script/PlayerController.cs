@@ -64,7 +64,6 @@ public class PlayerController : MonoBehaviour
         gameManager = gameManagerObject.GetComponent<gameManager>();
         bulletBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
-        gameManager.startTime = Time.time;
     }
     int bulletSlot = 400;
     float bulletBarWidth;
@@ -276,11 +275,6 @@ public class PlayerController : MonoBehaviour
     {
         if(other.gameObject.tag == "rotten_sheed") {
             spriteRenderer.sprite = damage;
-            if(status == "move") {
-                gameManager.damagePlayer(5.0f);
-            } else {
-                gameManager.damagePlayer(1.0f);
-            }
             StartCoroutine(changeToDef(1f));
         } else if(other.gameObject.tag == "protect_bullet") {
             CircleCollider2D col = other.gameObject.GetComponent<CircleCollider2D>();

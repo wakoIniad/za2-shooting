@@ -10,7 +10,7 @@ public class restart : MonoBehaviour
     {
         //Application.LoadLevel(Application.loadedLevel);
         //SceneManager.LoadScene(0);
-        SceneManager.LoadScene("SampleScene");  
+        SceneManager.LoadScene("riceball");  
     }
 
     // Update is called once per frame

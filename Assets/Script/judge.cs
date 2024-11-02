@@ -36,8 +36,8 @@ public class judge : MonoBehaviour
         for(int t = 0;0 < time;t++) {
             Debug.Log(time-t+"!");
             yield return new WaitForSeconds(1);
-            if(!countdownNow)return;
+            if(!countdownNow)break;
         }
-        gameManager.lose();
+        if(countdownNow)gameManager.lose();
     }
 }
