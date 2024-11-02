@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class displayResult : MonoBehaviour
 {
@@ -19,14 +20,13 @@ public class displayResult : MonoBehaviour
     int calcScore(int n) {
         return (int) (100 * 10000/n);
     }
-    void Update()
-    {
+    void Update() {
         DateTime awakeDateTime = DateTime.Now;
         string date =  awakeDateTime.ToBinary().ToString();
         if(result) {
             text.text = date+"\nYou Win, score="+calcScore(score);
         } else {
             text.text = date+"\nYou Lose, score=none";
-        }
+        };
     }
 }
