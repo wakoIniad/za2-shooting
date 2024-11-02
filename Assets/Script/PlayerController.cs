@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
         public Vector2 vec;
     }
 
-
+    public GameObject self;
     public Sprite def;
     public Sprite move;
     public Sprite attack;
@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         bulletBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
         gameManager.startTime = Time.time;
+        multi();
     }
     int bulletSlot = 400;
     float bulletBarWidth;
@@ -317,5 +318,11 @@ public class PlayerController : MonoBehaviour
             var points = physicsShape.ToArray();
             polygonCollider2D.SetPath( i, points );
         }
+    }
+    IEnumerator multi() {
+        yield return new WaitForSeconds(60f);
+        Vector2 newEnemyPos = new Vector2(0,0);
+		// 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
+		GameObject newEnemy = Instantiate(self, newEnemyPos, this.gameObject.transform.rotation);
     }
 }
