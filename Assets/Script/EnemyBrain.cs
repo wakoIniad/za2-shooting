@@ -61,7 +61,7 @@ public class EnemyBrain : MonoBehaviour
     {
         if(other.gameObject.tag == "purified_sheed") {
             hp--;
-            gameManager.damageEnemy(1f,this.gameObject,hp);
+            gameManager.damageEnemy(0.5f,this.gameObject,hp);
             if(hp < 0) {
             }
         }
