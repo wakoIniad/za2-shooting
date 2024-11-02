@@ -11,6 +11,7 @@ public class gameManager : MonoBehaviour
     public float startTime;
     public float endTime;
     public float judgement = 0;
+    public GameObject enemy;
 
     public float playerPoint = 500;
     public float enemyPoint = 500;
@@ -20,6 +21,8 @@ public class gameManager : MonoBehaviour
     void Start()
     {
         judgeBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
+        
+        multi();
     }
 
 //    float judgeBarWidth = 16;
@@ -61,6 +64,7 @@ public class gameManager : MonoBehaviour
         
     }
 
+
     bool result;
     void ActiveSceneChanged(Scene thisScene, Scene nextScene) {
         SceneManager.activeSceneChanged -= ActiveSceneChanged;
@@ -73,5 +77,14 @@ public class gameManager : MonoBehaviour
         SceneManager.activeSceneChanged += ActiveSceneChanged;
         result = win;
         endTime = Time.time;;
+    }
+
+    IEnumerator multi() {
+        yield return new WaitForSeconds(30f);
+        Vector2 newEnemyPos = new Vector2(0,0);
+		// 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
+		GameObject newEnemy = Instantiate(enemy, newEnemyPos, this.gameObject.transform.rotation);
+        
+        multi();
     }
 }
