@@ -13,8 +13,8 @@ public class gameManager : MonoBehaviour
     public float judgement = 0;
     public GameObject enemy;
 
-    public float playerPoint = 500;
-    public float enemyPoint = 500;
+    public float playerPoint = 200;
+    public float enemyPoint = 200;
 
     public GameObject judgeBar;
     // Start is called before the first frame update

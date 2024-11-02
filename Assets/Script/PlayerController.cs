@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
         public KeyCode [] keyCodes;
         public Vector2 vec;
     }
+    public Sprite redbar;
+    public Sprite greenbar;
 
     public GameObject self;
     public Sprite def;
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
         bulletCount = bulletSlot;
         gameManager.startTime = Time.time;
     }
-    int bulletSlot = 400;
+    int bulletSlot = 500;
     float bulletBarWidth;
 
     int bulletCount = 100;
@@ -158,6 +160,12 @@ public class PlayerController : MonoBehaviour
     string attackStatus = "ok";
 
     void displayBulletBar() {
+        SpriteRenderer sr = bulletBar.GetComponent<SpriteRenderer>();
+        if(attackStatus == "heavyReload") {
+            sr.sprite = redbar;
+        } else {
+            sr.sprite = greenbar;
+        }
         bulletBar.transform.localScale = new Vector3(1.3f*bulletCount/bulletSlot, 0.13f, 1);
     }
     float clock = 0f;
@@ -171,8 +179,8 @@ public class PlayerController : MonoBehaviour
             
             if(attackStatus == "reload" || attackStatus == "heavyReload") {
                 if(bulletCount < bulletSlot) {
-                    if(attackStatus == "heavyReload")bulletCount += 2;
-                    if(attackStatus == "reload")bulletCount += 1;
+                    if(attackStatus == "heavyReload")bulletCount += 4;
+                    if(attackStatus == "reload")bulletCount += 3;
                 } else {
                     attackStatus = "ok";
                     bulletCount = bulletSlot;
@@ -271,7 +279,7 @@ public class PlayerController : MonoBehaviour
             if(status == "move") {
                 gameManager.damagePlayer(8f);
             } else {
-                gameManager.damagePlayer(2f);
+                gameManager.damagePlayer(1.5f);
             }
             StartCoroutine(changeToDef(1f));
         } else if(other.gameObject.tag == "protect_bullet") {

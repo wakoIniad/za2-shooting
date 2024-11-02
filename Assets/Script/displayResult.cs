@@ -21,12 +21,12 @@ public class displayResult : MonoBehaviour
         return (int) (100 * 10000/n);
     }
     void Update() {
-        DateTime awakeDateTime = DateTime.Now;
-        string date =  awakeDateTime.ToBinary().ToString();
+        //DateTime awakeDateTime = DateTime.Now;
+        //string date =  awakeDateTime.ToBinary().ToString();
         if(result) {
-            text.text = date+"\nYou Win, score="+calcScore(score);
+            text.text = "You Win, score="+calcScore(score);
         } else {
-            text.text = date+"\nYou Lose, score=none";
+            text.text = "You Lose, score=none";
         };
     }
 }
