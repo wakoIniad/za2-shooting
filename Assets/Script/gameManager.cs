@@ -80,7 +80,7 @@ public class gameManager : MonoBehaviour
     }
 
     IEnumerator multi() {
-        yield return new WaitForSeconds(30f);
+        yield return new WaitForSeconds(40f);
         Vector2 newEnemyPos = new Vector2(0,0);
 		// 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
 		GameObject newEnemy = Instantiate(enemy, newEnemyPos, this.gameObject.transform.rotation);
