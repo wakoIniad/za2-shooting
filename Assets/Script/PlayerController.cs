@@ -233,10 +233,10 @@ public class PlayerController : MonoBehaviour
                     //bulletCount = 0;
                 }
 
-                if (Input.GetKey(KeyCode.Q)||Input.GetKey(KeyCode.A)) {
+                if (Input.GetKey(KeyCode.Q)/*||Input.GetKey(KeyCode.A)*/) {
                     playerRotate(1);
                 }
-                if (Input.GetKey(KeyCode.E)||Input.GetKey(KeyCode.D)) {
+                if (Input.GetKey(KeyCode.E)/*||Input.GetKey(KeyCode.D)*/) {
                     playerRotate(-1);
                 }
 
