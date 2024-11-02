@@ -33,4 +33,9 @@ public class gameManager : MonoBehaviour
         result = win;
         endTime = Time.time;
     }
+
+    public void lose() {
+        displayResult(false);
+        //相手に結果を送る通信
+    }
 }

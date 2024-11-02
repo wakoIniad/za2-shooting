@@ -10,6 +10,7 @@ TagManager:
   - judge_bar
   - ResultManager
   - protect_bullet
+  - ThisPlayer
   layers:
   - Default
   - TransparentFX
