@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         bulletCount = bulletSlot;
         gameManager.startTime = Time.time;
     }
-    int bulletSlot = 500;
+    int bulletSlot = 400;
     float bulletBarWidth;
 
     int bulletCount = 100;
@@ -179,8 +179,8 @@ public class PlayerController : MonoBehaviour
             
             if(attackStatus == "reload" || attackStatus == "heavyReload") {
                 if(bulletCount < bulletSlot) {
-                    if(attackStatus == "heavyReload")bulletCount += 4;
-                    if(attackStatus == "reload")bulletCount += 3;
+                    if(attackStatus == "heavyReload")bulletCount += 30;
+                    if(attackStatus == "reload")bulletCount += 45;
                 } else {
                     attackStatus = "ok";
                     bulletCount = bulletSlot;
@@ -277,9 +277,9 @@ public class PlayerController : MonoBehaviour
         if(other.gameObject.tag == "rotten_sheed") {
             spriteRenderer.sprite = damage;
             if(status == "move") {
-                gameManager.damagePlayer(8f);
+                gameManager.damagePlayer(5.0f);
             } else {
-                gameManager.damagePlayer(1.5f);
+                gameManager.damagePlayer(1.0f);
             }
             StartCoroutine(changeToDef(1f));
         } else if(other.gameObject.tag == "protect_bullet") {

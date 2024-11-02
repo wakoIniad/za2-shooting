@@ -24,9 +24,9 @@ public class displayResult : MonoBehaviour
         //DateTime awakeDateTime = DateTime.Now;
         //string date =  awakeDateTime.ToBinary().ToString();
         if(result) {
-            text.text = "You Win, score="+calcScore(score);
+            text.text = "You Win";
         } else {
-            text.text = "You Lose, score=none";
+            text.text = "You Lose";
         };
     }
 }
