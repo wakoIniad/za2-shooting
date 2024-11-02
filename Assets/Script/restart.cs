@@ -9,8 +9,8 @@ public class restart : MonoBehaviour
     public void OnClick()
     {
         //Application.LoadLevel(Application.loadedLevel);
-        SceneManager.LoadScene(0);
-        //SceneManager.LoadScene("SampleScene");  
+        //SceneManager.LoadScene(0);
+        SceneManager.LoadScene("SampleScene");  
     }
 
     // Update is called once per frame
