@@ -20,26 +20,26 @@ public class gameManager : MonoBehaviour
         _webSocket.OnOpen += (sender, e) => Debug.Log("WebSocket Open");
         _webSocket.OnMessage += (sender, e) => {
             Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
-            JsonNode json = JsonNode.Parse(e.Data);
-            JsonNode type = json.get("type");
-            JsonNode value = json.get("value");
+            string[] param = e.Data.Split("|");
+            string type = param[0];
             if(type == "result") {
                 win();
             } else if(type == "pos") {
-                JsonNode[] pos = value.get("pos");
-                JsonNode[] ag = value.get("ag");
-                thisPlayer.transform.Translate(Single.Parse(pos.get("x")),Single.Parse(pos.get("y")));
+                string[] pos = param[1].Split(",");
+                string[] ag = param[2].Split(",");
+                thisPlayer.transform.Translate(Single.Parse(pos[0]),Single.Parse(pos[1]),0);
                 
                 Vector3 worldAngle = thisPlayer.transform.eulerAngles;
-                worldAngle.x = Single.Parse(ag.get("x"));
-                worldAngle.y = Single.Parse(ag.get("y"));
-                worldAngle.z = Single.Parse(ag.get("z"));
+                worldAngle.x = Single.Parse(ag[0]);
+                worldAngle.y = Single.Parse(ag[1]);
+                worldAngle.z = Single.Parse(ag[2]);
                 thisPlayer.transform.eulerAngles = worldAngle;
             }
         };
         _webSocket.OnError += (sender, e) => Debug.Log("WebSocket Error Message: " + e.Message);
         _webSocket.OnClose += (sender, e) => Debug.Log("WebSocket Close");
         _webSocket.Connect();
+        StartCoroutine("sendInfo");
     }
 
     // Update is called once per frame
@@ -66,20 +66,31 @@ public class gameManager : MonoBehaviour
         //相手に結果を送る通信
         
         Debug.Log("I lose, you win.");
-        _webSocket.Send("{\"type\":\"result\"}");
+        _webSocket.Send("result");
     }
 
     public void win() {
         displayResult(true);
-        
         Debug.Log("enemy lose.I win");
     }
-
     
 
     private void OnDestroy()
     {
         _webSocket.Close();
         _webSocket = null;
+    }
+
+    IEnumerator sendInfo(CircleCollider2D target)
+    {
+        while(true) {
+            yield return new WaitForSeconds(0.5f);
+            
+            Vector3 worldAngle = thisPlayer.transform.eulerAngles;
+            Vector3 worldPosition = thisPlayer.transform.position;
+            worldAngle.x = Single.Parse(ag[0]);
+            _webSocket.Send("pos|"+worldPosition.x+","+worldPosition.y+"|"+worldAngle.x+","+worldAngle.y+","+worldAngle.z);
+
+        }
     }
 }
