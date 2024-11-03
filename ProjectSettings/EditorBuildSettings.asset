@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/riceball.unity
+    guid: cc06e0c7ed239a5428c8dce5eee6687d
+  - enabled: 1
     path: Assets/Scenes/result.unity
     guid: 852f4885dc2dfa14f930ae37eb9dc7ef
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects:

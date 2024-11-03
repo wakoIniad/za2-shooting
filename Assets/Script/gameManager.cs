@@ -11,13 +11,15 @@ using WebSocketSharp;
 
 public class gameManager : MonoBehaviour
 {
-
+    public string id;
     public GameObject thisPlayer;
     public GameObject opponent;
     private WebSocket _webSocket;
     void Start()
     { // websocket
-        _webSocket = new WebSocket("ws://earwig-ruling-forcibly.ngrok-free.app");
+        _webSocket = new WebSocket("wss://earwig-ruling-forcibly.ngrok-free.app");
+        //_webSocket.SslConfiguration.EnabledSslProtocols = System.Security.Authentication.SslProtocols.Tls12;
+
         _webSocket.OnOpen += (sender, e) => {
             Debug.Log("WebSocket Open");
             StartCoroutine("sendInfo");
