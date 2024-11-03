@@ -88,7 +88,6 @@ public class gameManager : MonoBehaviour
             
             Vector3 worldAngle = thisPlayer.transform.eulerAngles;
             Vector3 worldPosition = thisPlayer.transform.position;
-            worldAngle.x = Single.Parse(ag[0]);
             _webSocket.Send("pos|"+worldPosition.x+","+worldPosition.y+"|"+worldAngle.x+","+worldAngle.y+","+worldAngle.z);
 
         }
