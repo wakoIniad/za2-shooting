@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         counter++;//ここ
         if(mode == 1 && counter % 50 == 0) {
-            if(bulletUse(1.5f))return;
+            if(bulletUse(1f))return;
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%25==0) {
             
-            if(bulletUse(0.5f))return;
+            if(bulletUse(0.35f))return;
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
