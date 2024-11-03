@@ -17,10 +17,10 @@ public class gameManager : MonoBehaviour
     private WebSocket _webSocket;
     void Start()
     { // websocket
-        _webSocket = new WebSocket("wss://earwig-ruling-forcibly.ngrok-free.app/");
+        _webSocket = new WebSocket("ws://localhost:3000");
         _webSocket.OnOpen += (sender, e) => {
-            StartCoroutine("sendInfo");
             Debug.Log("WebSocket Open");
+            StartCoroutine("sendInfo");
         };
         _webSocket.OnMessage += (sender, e) => {
             Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
@@ -80,6 +80,7 @@ public class gameManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        Debug.Log("OnDestroy");
         _webSocket.Close();
         _webSocket = null;
     }

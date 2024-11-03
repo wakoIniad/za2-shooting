@@ -64,12 +64,12 @@ public class PlayerController : MonoBehaviour
         bulletBarWidth = bulletBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
     }
-    int bulletSlot = 400;
+    int bulletSlot = 50;
     float bulletBarWidth;
 
-    int bulletCount = 100;
+    int bulletCount = 50;
     float spendTime = 0f;
-    float defSpeed = 25f;
+    float defSpeed = 10f;
     float speed = 10f;
     float lastPushedTime = -1f;
 
@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     float dashTimeLimit = 0.3f;
 
     //ダッシュ速度を設定(1が歩く速度と同じ)
-    float dashSpeedRate = 10f;
+    float dashSpeedRate = 20f;
     KeyCode lastPushedId = KeyCode.None;
     
     // Update is called once per frame
@@ -108,7 +108,7 @@ public class PlayerController : MonoBehaviour
             lastAttackerClock += attackerClock;
         }
         counter++;//ここ
-        if(mode == 1 && counter % 10 == 0) {
+        if(mode == 1 && counter % 50 == 0) {
             if(bulletUse(4))return;
             //var rotation = this.transform.rotation;
 
@@ -124,7 +124,7 @@ public class PlayerController : MonoBehaviour
 		    newBullet.name = bullet.name;
 		    // 出現させた弾を0.8秒後に消す
 		    Destroy(newBullet, 1.0f);
-        } else if(mode == 2 && counter%10==0) {
+        } else if(mode == 2 && counter%25==0) {
             
             if(bulletUse(2))return;
             
@@ -144,10 +144,12 @@ public class PlayerController : MonoBehaviour
 
     float lastTime = 0;
     int frameCounter = 0;
+    int lastRotateFrame = 0;
     void playerRotate(int direction) {
-        if(frameCounter%3 == 0) {
-            this.gameObject.transform.Rotate(new Vector3(0,0,direction));
+        if(frameCounter != lastRotateFrame) {
+            this.gameObject.transform.Rotate(new Vector3(0,0,direction*3));
             lastTime = Time.fixedDeltaTime;
+            lastRotateFrame = frameCounter;
         }
         //}
     }
@@ -171,14 +173,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         clock += Time.deltaTime;
-        if(clock - lastFrameClock > 0.04f) {
+        if(clock - lastFrameClock > 0.05f) {
             frameCounter++;
-            lastFrameClock += 0.04f;
+            lastFrameClock += 0.05f;
             
             if(attackStatus == "reload" || attackStatus == "heavyReload") {
                 if(bulletCount < bulletSlot) {
-                    if(attackStatus == "heavyReload")bulletCount += 30;
-                    if(attackStatus == "reload")bulletCount += 45;
+                    if(attackStatus == "heavyReload")bulletCount += (int) Time.deltaTime*20;
+                    if(attackStatus == "reload")bulletCount += (int) Time.deltaTime*40;
                 } else {
                     attackStatus = "ok";
                     bulletCount = bulletSlot;
