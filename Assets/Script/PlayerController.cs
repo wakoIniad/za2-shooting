@@ -28,7 +28,6 @@ public class PlayerController : MonoBehaviour
     public GameObject gameManagerObject;
     public gameManager gameManager;
 
-    public GameObject judgeBar;
     public GameObject bulletBar;
 
     [SerializeField]
@@ -62,7 +61,7 @@ public class PlayerController : MonoBehaviour
         //[x,y] 右が+ 前が+
         //gameManager= GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
         gameManager = gameManagerObject.GetComponent<gameManager>();
-        bulletBarWidth = judgeBar.GetComponent<SpriteRenderer>().bounds.size.x;
+        bulletBarWidth = bulletBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
     }
     int bulletSlot = 400;

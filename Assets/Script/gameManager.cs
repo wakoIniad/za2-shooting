@@ -13,6 +13,7 @@ public class gameManager : MonoBehaviour
 {
 
     public GameObject thisPlayer;
+    public GameObject opponent;
     private WebSocket _webSocket;
     void Start()
     { // websocket
