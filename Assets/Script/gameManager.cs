@@ -28,13 +28,13 @@ public class gameManager : MonoBehaviour
             } else if(type == "pos") {
                 string[] pos = param[1].Split(",");
                 string[] ag = param[2].Split(",");
-                thisPlayer.transform.Translate(Single.Parse(pos[0]),Single.Parse(pos[1]),0);
+                opponent.transform.Translate(Single.Parse(pos[0]),Single.Parse(pos[1]),0);
                 
-                Vector3 worldAngle = thisPlayer.transform.eulerAngles;
+                Vector3 worldAngle = opponent.transform.eulerAngles;
                 worldAngle.x = Single.Parse(ag[0]);
                 worldAngle.y = Single.Parse(ag[1]);
                 worldAngle.z = Single.Parse(ag[2]);
-                thisPlayer.transform.eulerAngles = worldAngle;
+                opponent.transform.eulerAngles = worldAngle;
             }
         };
         _webSocket.OnError += (sender, e) => Debug.Log("WebSocket Error Message: " + e.Message);
@@ -82,7 +82,7 @@ public class gameManager : MonoBehaviour
         _webSocket = null;
     }
 
-    IEnumerator sendInfo(CircleCollider2D target)
+    IEnumerator sendInfo()
     {
         while(true) {
             yield return new WaitForSeconds(0.5f);

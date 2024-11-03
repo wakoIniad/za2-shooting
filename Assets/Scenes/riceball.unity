@@ -269,11 +269,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_Name
-      value: PlayerB
+      value: Opponent
       objectReference: {fileID: 0}
     - target: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_TagString
-      value: Player
+      value: Opponent
       objectReference: {fileID: 0}
     - target: {fileID: 8354720259753225184, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_LocalScale.x
@@ -336,9 +336,6 @@ PrefabInstance:
       addedObject: {fileID: 257960923}
     - targetCorrespondingSourceObject: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 257960922}
-    - targetCorrespondingSourceObject: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 257960921}
     - targetCorrespondingSourceObject: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       insertIndex: -1
@@ -375,7 +372,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 7
 --- !u!60 &257960921
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -383,7 +380,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257960918}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -439,31 +436,6 @@ PolygonCollider2D:
       - {x: 4.5299997, y: -0.85999995}
       - {x: 4.8199997, y: 0.25}
   m_UseDelaunayMesh: 0
---- !u!114 &257960922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 257960918}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613ada0fa0280a2488e07f0db65ecd7e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  redbar: {fileID: 21300000, guid: ee90ea9e5b6485f4aacafc294db90da9, type: 3}
-  greenbar: {fileID: 21300000, guid: 202f90b28f598a04291174e56a4dc42b, type: 3}
-  self: {fileID: 0}
-  def: {fileID: 21300000, guid: 84ed951fa168005408dfd24b0025de34, type: 3}
-  move: {fileID: 21300000, guid: 6fca4cdb0b534d741bf9ff5bfe144596, type: 3}
-  attack: {fileID: 21300000, guid: 6eec41115ad6fc94ebcebf46db2bc285, type: 3}
-  damage: {fileID: 21300000, guid: ac367a8973df2f74ab44ca87e1c0f6e4, type: 3}
-  gameManagerObject: {fileID: 0}
-  gameManager: {fileID: 0}
-  judgeBar: {fileID: 0}
-  bulletBar: {fileID: 0}
-  bullet: {fileID: 4887314810943142415, guid: 505d9ce08ba3f7c40a02c7cfde4569ce, type: 3}
-  protectSeed: {fileID: 7014171327435536488, guid: 5ed525d71259d7b4fadc5ace57d8c158, type: 3}
 --- !u!212 &257960923
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -559,6 +531,52 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1198228882}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &635774231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635774233}
+  - component: {fileID: 635774232}
+  m_Layer: 0
+  m_Name: gameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &635774232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635774231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c6ab6b69e7b235409d6297082a4a6ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisPlayer: {fileID: 1798619607}
+  opponent: {fileID: 257960918}
+--- !u!4 &635774233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635774231}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5665374, y: -12.260654, z: -10.1523285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1198228881
@@ -2336,7 +2354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_Name
-      value: PlayerA
+      value: ThisPlayer
       objectReference: {fileID: 0}
     - target: {fileID: 5114479659206803952, guid: c24252d9769a60348aa1cf36dd922247, type: 3}
       propertyPath: m_TagString
@@ -2536,9 +2554,8 @@ MonoBehaviour:
   move: {fileID: 21300000, guid: 6fca4cdb0b534d741bf9ff5bfe144596, type: 3}
   attack: {fileID: 21300000, guid: 6eec41115ad6fc94ebcebf46db2bc285, type: 3}
   damage: {fileID: 21300000, guid: ac367a8973df2f74ab44ca87e1c0f6e4, type: 3}
-  gameManagerObject: {fileID: 0}
+  gameManagerObject: {fileID: 635774231}
   gameManager: {fileID: 0}
-  judgeBar: {fileID: 0}
   bulletBar: {fileID: 2005104595}
   bullet: {fileID: 4887314810943142415, guid: 505d9ce08ba3f7c40a02c7cfde4569ce, type: 3}
   protectSeed: {fileID: 7014171327435536488, guid: 5ed525d71259d7b4fadc5ace57d8c158, type: 3}
@@ -2686,3 +2703,4 @@ SceneRoots:
   - {fileID: 1798619606}
   - {fileID: 257960917}
   - {fileID: 224076343}
+  - {fileID: 635774233}
