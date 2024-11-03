@@ -18,7 +18,10 @@ public class gameManager : MonoBehaviour
     void Start()
     { // websocket
         _webSocket = new WebSocket("wss://earwig-ruling-forcibly.ngrok-free.app/");
-        _webSocket.OnOpen += (sender, e) => Debug.Log("WebSocket Open");
+        _webSocket.OnOpen += (sender, e) => {
+            StartCoroutine("sendInfo");
+            Debug.Log("WebSocket Open");
+        };
         _webSocket.OnMessage += (sender, e) => {
             Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
             string[] param = e.Data.Split("|");
@@ -40,7 +43,6 @@ public class gameManager : MonoBehaviour
         _webSocket.OnError += (sender, e) => Debug.Log("WebSocket Error Message: " + e.Message);
         _webSocket.OnClose += (sender, e) => Debug.Log("WebSocket Close");
         _webSocket.Connect();
-        StartCoroutine("sendInfo");
     }
 
     // Update is called once per frame
