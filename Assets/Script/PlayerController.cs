@@ -64,10 +64,10 @@ public class PlayerController : MonoBehaviour
         bulletBarWidth = bulletBar.GetComponent<SpriteRenderer>().bounds.size.x;
         bulletCount = bulletSlot;
     }
-    int bulletSlot = 50;
+    float bulletSlot = 50;
     float bulletBarWidth;
 
-    int bulletCount = 50;
+    float bulletCount = 50;
     float spendTime = 0f;
     float defSpeed = 10f;
     float speed = 10f;
@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
 
     int counter = 0;
 
-    bool bulletUse(int count) {
+    bool bulletUse(float count) {
         
             displayBulletBar();
             if(bulletCount < 0) {
@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
         }
         counter++;//ここ
         if(mode == 1 && counter % 50 == 0) {
-            if(bulletUse(4))return;
+            if(bulletUse(0.5f))return;
             //var rotation = this.transform.rotation;
 
             Vector2 bulletPosition = this.transform.position;
@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%25==0) {
             
-            if(bulletUse(2))return;
+            if(bulletUse(0.5f))return;
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
@@ -179,8 +179,8 @@ public class PlayerController : MonoBehaviour
             
             if(attackStatus == "reload" || attackStatus == "heavyReload") {
                 if(bulletCount < bulletSlot) {
-                    if(attackStatus == "heavyReload")bulletCount += (int) Time.deltaTime*20;
-                    if(attackStatus == "reload")bulletCount += (int) Time.deltaTime*40;
+                    if(attackStatus == "heavyReload")bulletCount += Time.deltaTime*50;
+                    if(attackStatus == "reload")bulletCount += Time.deltaTime*100;
                 } else {
                     attackStatus = "ok";
                     bulletCount = bulletSlot;

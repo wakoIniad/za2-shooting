@@ -80,9 +80,9 @@ public class gameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        Debug.Log("OnDestroy");
-        _webSocket.Close();
-        _webSocket = null;
+        //Debug.Log("OnDestroy");
+        //_webSocket.Close();
+        //_webSocket = null;
     }
 
     IEnumerator sendInfo()
