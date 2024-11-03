@@ -17,7 +17,7 @@ public class gameManager : MonoBehaviour
     private WebSocket _webSocket;
     void Start()
     { // websocket
-        _webSocket = new WebSocket("ws://localhost:3000");
+        _webSocket = new WebSocket("ws://earwig-ruling-forcibly.ngrok-free.app");
         _webSocket.OnOpen += (sender, e) => {
             Debug.Log("WebSocket Open");
             StartCoroutine("sendInfo");
@@ -41,7 +41,11 @@ public class gameManager : MonoBehaviour
             }
         };
         _webSocket.OnError += (sender, e) => Debug.Log("WebSocket Error Message: " + e.Message);
-        _webSocket.OnClose += (sender, e) => Debug.Log("WebSocket Close");
+        _webSocket.OnClose += (sender, e) => {
+            Debug.Log(e);
+            Debug.Log(sender);
+            Debug.Log("WebSocket Close");
+        };
         _webSocket.Connect();
     }
 
