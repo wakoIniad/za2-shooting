@@ -25,7 +25,8 @@ public class gameManager : MonoBehaviour
             StartCoroutine("sendInfo");
         };
         _webSocket.OnMessage += (sender, e) => {
-            Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
+            Debug.Log("AAA");
+            //Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
             string[] param = e.Data.Split("|");
             string type = param[0];
             if(type == "result") {

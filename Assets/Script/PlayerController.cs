@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
 		    Destroy(newBullet, 1.0f);
         } else if(mode == 2 && counter%25==0) {
             
-            if(bulletUse(1.5f))return;
+            if(bulletUse(0.5f))return;
             
             Vector2 bulletPosition = this.transform.position;
 		    // 上で取得した場所に、"bullet"のPrefabを出現させる。Bulletの向きはMuzzleのローカル値と同じにする（3つ目の引数）
@@ -179,8 +179,8 @@ public class PlayerController : MonoBehaviour
             
             if(attackStatus == "reload" || attackStatus == "heavyReload") {
                 if(bulletCount < bulletSlot) {
-                    if(attackStatus == "heavyReload")bulletCount += Time.deltaTime*100;
-                    if(attackStatus == "reload")bulletCount += Time.deltaTime*200;
+                    if(attackStatus == "heavyReload")bulletCount += Time.deltaTime*200;
+                    if(attackStatus == "reload")bulletCount += Time.deltaTime*400;
                 } else {
                     attackStatus = "ok";
                     bulletCount = bulletSlot;
