@@ -8,18 +8,33 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using WebSocketSharp;
+
 public class gameManager : MonoBehaviour
 {
 
+    public GameObject thisPlayer;
     private WebSocket _webSocket;
     void Start()
     { // websocket
         _webSocket = new WebSocket("wss://earwig-ruling-forcibly.ngrok-free.app/");
         _webSocket.OnOpen += (sender, e) => Debug.Log("WebSocket Open");
         _webSocket.OnMessage += (sender, e) => {
-            Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);
-            if(e.Data == "you_win") {
+            Debug.Log("WebSocket Message Type: " + e.GetType() + ", Data: " + e.Data);            
+            JsonNode json = JsonNode.Parse(e.Data);
+            JsonNode type = json.get("type");
+            JsonNode value = json.get("value");
+            if(type == "result") {
                 win();
+            } else if(type == "pos") {
+                JsonNode[] pos = value.get("pos");
+                JsonNode[] ag = value.get("ag");
+                thisPlayer.transform.Translate(Single.Parse(pos.get("x")),Single.Parse(pos.get("y")));
+                
+                Vector3 worldAngle = thisPlayer.transform.eulerAngles;
+                worldAngle.x = Single.Parse(ag.get("x"));
+                worldAngle.y = Single.Parse(ag.get("y"));
+                worldAngle.z = Single.Parse(ag.get("z"));
+                thisPlayer.transform.eulerAngles = worldAngle;
             }
         };
         _webSocket.OnError += (sender, e) => Debug.Log("WebSocket Error Message: " + e.Message);
@@ -51,12 +66,11 @@ public class gameManager : MonoBehaviour
         //相手に結果を送る通信
         
         Debug.Log("I lose, you win.");
-        _webSocket.Send("you_win");
+        _webSocket.Send("{\"type\":\"result\"}");
     }
 
     public void win() {
-        displayResult(ture);
-        //相手に結果を送る通信
+        displayResult(true);
         
         Debug.Log("enemy lose.I win");
     }

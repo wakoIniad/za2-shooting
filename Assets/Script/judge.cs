@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class judge : MonoBehaviour
 {
-    public GameObject myPlayer;
+    public GameObject thisPlayer;
     public GameObject gameManagerObject;
     public gameManager gameManager;
     // Start is called before the first frame update
